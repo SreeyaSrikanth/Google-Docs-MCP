@@ -1,22 +1,45 @@
+# -------------------------
+# Python MCP Project Gitignore
+# -------------------------
+
 # Virtual environment
 venv/
+ENV/
+env/
 
-# Google OAuth secrets (never commit real one)
+# Google OAuth credentials (never commit your real secrets)
 client_secret.json
 
-# User tokens (OAuth refresh tokens)
+# User OAuth token folder
 tokens/
 
-# Python cache
+# Python cache / bytecode
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
+*.pkl
 
-# OS / editor files
+# Build artifacts
+dist/
+build/
+*.egg-info/
+
+# Logs
+*.log
+
+# OS/editor files
 .DS_Store
+Thumbs.db
 .vscode/
 .idea/
 
-# Other
-*.log
+# Environment files
+.env
+*.env
+
+# Virtualenv metadata
+.Python
+
+# Docker
+*.pid
