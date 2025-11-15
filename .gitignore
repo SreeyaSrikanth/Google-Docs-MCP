@@ -1,0 +1,22 @@
+# Virtual environment
+venv/
+
+# Google OAuth secrets (never commit real one)
+client_secret.json
+
+# User tokens (OAuth refresh tokens)
+tokens/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# OS / editor files
+.DS_Store
+.vscode/
+.idea/
+
+# Other
+*.log
