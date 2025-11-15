@@ -1,0 +1,28 @@
+{
+"name": "google_docs_mcp",
+"description": "MCP server to read/edit/format Google Docs",
+"version": "0.1.0",
+"tools": [
+{
+"name": "list_docs",
+"description": "List Google Docs files the user has access to",
+"input_schema": {"type":"object", "properties":{}}
+},
+{
+"name": "get_doc",
+"description": "Return structured Google Doc content",
+"input_schema": {"type":"object","properties":{"documentId":{"type":"string"}}}
+},
+{
+"name": "insert_text",
+"description": "Insert text at a location",
+"input_schema": {"type":"object","properties":{"documentId":{"type":"string"},"text":{"type":"string"},"index":{"type":"integer"}}}
+},
+{
+"name": "format_range",
+"description": "Apply bold/italic/heading to a text range",
+"input_schema": {"type":"object","properties":{"documentId":{"type":"string"},"start_index":{"type":"integer"},"end_index":{"type":"integer"},"format":{"type":"string"}}}
+}
+],
+"auth": {"type":"oauth2", "scopes":["https://www.googleapis.com/auth/documents","https://www.googleapis.com/auth/drive.readonly"]}
+}
