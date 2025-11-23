@@ -4,11 +4,19 @@
 
 # Virtual environment
 venv/
+.venv/
 ENV/
 env/
+.env/
+
+# UV cache and artifacts
+.uv/
+uv.lock
 
 # Google OAuth credentials (never commit your real secrets)
 client_secret.json
+credentials.json
+token.json
 
 # User OAuth token folder
 tokens/
@@ -19,27 +27,57 @@ __pycache__/
 *.pyo
 *.pyd
 *.pkl
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
 
 # Build artifacts
 dist/
 build/
 *.egg-info/
+.eggs/
 
 # Logs
 *.log
+logs/
 
 # OS/editor files
 .DS_Store
 Thumbs.db
 .vscode/
 .idea/
+*.swp
+*.swo
+*~
 
 # Environment files
 .env
 *.env
+.env.local
+.env.*.local
 
 # Virtualenv metadata
 .Python
+pip-log.txt
+pip-delete-this-directory.txt
 
 # Docker
 *.pid
+docker-compose.override.yml
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# MCP specific
+.mcp/
+mcp-cache/

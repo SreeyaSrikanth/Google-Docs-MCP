@@ -60,7 +60,6 @@ def oauth2callback(request: Request):
     )
     flow.fetch_token(code=code)
     creds = flow.credentials
-    # Save credentials (for demo only — replace with secure storage in prod)
     with open(TOKEN_FILE, "w") as f:
         f.write(creds.to_json())
     return HTMLResponse("Authorized. You can close this tab. Server ready.")
@@ -83,11 +82,10 @@ def load_creds() -> Credentials:
     if creds and creds.expired and creds.refresh_token:
         try:
             creds.refresh(GoogleAuthRequest())
-            # Persist refreshed tokens back to disk (so refresh_token / access_token are up-to-date)
             with open(TOKEN_FILE, "w") as f:
                 f.write(creds.to_json())
         except Exception as e:
-            # If refresh fails, remove token file and require re-auth
+            # On refresh failure, delete the token file to force re-authorization
             try:
                 os.remove(TOKEN_FILE)
             except Exception:
@@ -97,7 +95,7 @@ def load_creds() -> Credentials:
     return creds
 
 
-# ---------- Minimal JSON-RPC style endpoint for MCP host ----------
+# ---------- JSON-RPC style endpoint for MCP host ----------
 @app.post("/mcp")
 async def mcp_endpoint(req: Request):
     """
@@ -127,7 +125,6 @@ async def mcp_endpoint(req: Request):
     except KeyError as ke:
         return JSONResponse({"jsonrpc": "2.0", "id": request_id, "error": {"message": f"missing param: {ke}"}} , status_code=400)
     except HTTPException as he:
-        # re-raise HTTPException payloads as MCP-style error
         return JSONResponse({"jsonrpc": "2.0", "id": request_id, "error": {"message": he.detail}}, status_code=he.status_code)
     except Exception as e:
         return JSONResponse({"jsonrpc": "2.0", "id": request_id, "error": {"message": str(e)}}, status_code=500)
